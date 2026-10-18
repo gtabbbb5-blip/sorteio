@@ -1,45 +1,25 @@
 {
-  "name": "gorjeta77-server",
+  "name": "gorjeta-77-lukas",
   "version": "1.0.0",
   "private": true,
-  "description": "Backend do Gorjeta 77 Lukas - API de cadastro, autenticacao administrativa e sorteios",
-  "main": "dist/index.js",
+  "description": "Gorjeta 77 Lukas - sistema publico de cadastro e sorteios com animacao cinematografica",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "db:migrate": "tsx src/scripts/migrate.ts",
-    "admin:create": "tsx src/scripts/create-admin.ts",
-    "seed:demo": "tsx src/scripts/seed-demo.ts",
-    "test": "vitest run",
-    "test:watch": "vitest"
-  },
-  "dependencies": {
-    "bcryptjs": "^3.0.3",
-    "cookie-parser": "^1.4.7",
-    "dotenv": "^18.0.8",
-    "express": "^5.3.0",
-    "helmet": "^8.3.0",
-    "pg": "^8.23.1",
-    "serverless-http": "^4.0.0",
-    "zod": "^4.6.7"
-  },
-  "devDependencies": {
-    "@types/cookie-parser": "^1.4.10",
-    "@types/express": "^5.0.6",
-    "@types/node": "^24.0.0",
-    "@types/pg": "^8.23.1",
-    "@types/supertest": "^6.0.0",
-    "supertest": "^7.3.1",
-    "tsx": "^4.23.15",
-    "typescript": "^5.9.3",
-    "vitest": "^5.0.5"
+    "dev": "concurrently -n server,web -c yellow,cyan \"npm run dev:server\" \"npm run dev:web\"",
+    "dev:server": "npm run dev --prefix server",
+    "dev:web": "npm run dev --prefix web",
+    "install:all": "npm install --prefix server && npm install --prefix web",
+    "build": "npm run build --prefix server && npm run build --prefix web",
+    "start": "npm start --prefix server",
+    "test": "npm test --prefix server",
+    "db:migrate": "npm run db:migrate --prefix server",
+    "admin:create": "npm run admin:create --prefix server",
+    "netlify:build": "node scripts/build-netlify.mjs"
   },
   "engines": {
     "node": ">=20.11"
   },
-  "allowScripts": {
-    "esbuild@0.28.2": true
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "esbuild": "^0.28.2"
   }
 }
